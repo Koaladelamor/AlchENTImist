@@ -7,7 +7,7 @@ public class Potion
 {
     public int id_potion;
     public string potion;
-    public int cost;
+    public float cost;
     public string icon;
     public string description;
     public int id_potion_type;

@@ -34,6 +34,7 @@ public class DBManager : MonoBehaviour
         Debug.Log("Abriendo BD");
         OpenDatabase();
         GetPotionTypes();
+        GetPotions();
     }
 
     // Update is called once per frame
@@ -93,7 +94,7 @@ public class DBManager : MonoBehaviour
             Debug.Log(newPotion.id_potion);
             newPotion.potion = dataReader.GetString(1);
             Debug.Log(newPotion.potion);
-            newPotion.cost = dataReader.GetInt32(2);
+            newPotion.cost = dataReader.GetFloat(2);
             Debug.Log(newPotion.cost);
             newPotion.icon = dataReader.GetString(3);
             Debug.Log(newPotion.icon);
@@ -106,6 +107,32 @@ public class DBManager : MonoBehaviour
 
     }
 
+    public void GetIngredients()
+    {
+        string query = "SELECT * FROM potions";
+        IDbCommand cmd = dbConnection.CreateCommand();
+        cmd.CommandText = query;
+
+        IDataReader dataReader = cmd.ExecuteReader();
+        while (dataReader.Read())
+        {
+            Potion newPotion = new Potion();
+            newPotion.id_potion = dataReader.GetInt32(0);
+            Debug.Log(newPotion.id_potion);
+            newPotion.potion = dataReader.GetString(1);
+            Debug.Log(newPotion.potion);
+            newPotion.cost = dataReader.GetFloat(2);
+            Debug.Log(newPotion.cost);
+            newPotion.icon = dataReader.GetString(3);
+            Debug.Log(newPotion.icon);
+            newPotion.description = dataReader.GetString(4);
+            Debug.Log(newPotion.description);
+            newPotion.id_potion_type = dataReader.GetInt32(5);
+            Debug.Log(newPotion.id_potion_type);
+            potions.Add(newPotion);
+        }
+
+    }
 
     #endregion
 }
