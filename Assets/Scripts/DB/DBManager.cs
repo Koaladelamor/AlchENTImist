@@ -12,6 +12,7 @@ public class DBManager : MonoBehaviour
 
     List<PotionType> potionTypes = new List<PotionType>();
     List<Potion> potions = new List<Potion>();
+    List<Ingredient> ingredients = new List<Ingredient>();
 
     #endregion
 
@@ -109,27 +110,26 @@ public class DBManager : MonoBehaviour
 
     public void GetIngredients()
     {
-        string query = "SELECT * FROM potions";
+        string query = "SELECT * FROM ingredients";
         IDbCommand cmd = dbConnection.CreateCommand();
         cmd.CommandText = query;
 
         IDataReader dataReader = cmd.ExecuteReader();
         while (dataReader.Read())
         {
-            Potion newPotion = new Potion();
-            newPotion.id_potion = dataReader.GetInt32(0);
-            Debug.Log(newPotion.id_potion);
-            newPotion.potion = dataReader.GetString(1);
-            Debug.Log(newPotion.potion);
-            newPotion.cost = dataReader.GetFloat(2);
-            Debug.Log(newPotion.cost);
-            newPotion.icon = dataReader.GetString(3);
-            Debug.Log(newPotion.icon);
-            newPotion.description = dataReader.GetString(4);
-            Debug.Log(newPotion.description);
-            newPotion.id_potion_type = dataReader.GetInt32(5);
-            Debug.Log(newPotion.id_potion_type);
-            potions.Add(newPotion);
+            Ingredient newIngredient = new Ingredient();
+            newIngredient.id_ingredient = dataReader.GetInt32(0);
+            Debug.Log(newIngredient.id_ingredient);
+            newIngredient.ingredient = dataReader.GetString(1);
+            Debug.Log(newIngredient.ingredient);
+            newIngredient.cost = dataReader.GetFloat(2);
+            Debug.Log(newIngredient.cost);
+            newIngredient.icon = dataReader.GetString(3);
+            Debug.Log(newIngredient.icon);
+            newIngredient.description = dataReader.GetString(4);
+            Debug.Log(newIngredient.description);
+
+            ingredients.Add(newIngredient);
         }
 
     }
