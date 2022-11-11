@@ -10,9 +10,9 @@ public class DBManager : MonoBehaviour
 
     public static DBManager _DB_MANAGER;
 
-    List<PotionType> potionTypes = new List<PotionType>();
-    List<Potion> potions = new List<Potion>();
-    List<Ingredient> ingredients = new List<Ingredient>();
+    private List<PotionType> potionTypes = new List<PotionType>();
+    private List<Potion> potions = new List<Potion>();
+    private List<Ingredient> ingredients = new List<Ingredient>();
 
     #endregion
 
@@ -21,7 +21,7 @@ public class DBManager : MonoBehaviour
     {
         if (_DB_MANAGER != null && _DB_MANAGER != this)
         {
-            Destroy(this);
+            Destroy(this.gameObject);
         }
         else {
             _DB_MANAGER = this;
@@ -36,6 +36,7 @@ public class DBManager : MonoBehaviour
         OpenDatabase();
         GetPotionTypes();
         GetPotions();
+        GetIngredients();
     }
 
     // Update is called once per frame
@@ -107,7 +108,6 @@ public class DBManager : MonoBehaviour
         }
 
     }
-
     public void GetIngredients()
     {
         string query = "SELECT * FROM ingredients";
@@ -115,6 +115,7 @@ public class DBManager : MonoBehaviour
         cmd.CommandText = query;
 
         IDataReader dataReader = cmd.ExecuteReader();
+
         while (dataReader.Read())
         {
             Ingredient newIngredient = new Ingredient();
@@ -131,8 +132,9 @@ public class DBManager : MonoBehaviour
 
             ingredients.Add(newIngredient);
         }
-
     }
 
     #endregion
+
+    public List<Ingredient> GetIngredientsList() { return ingredients; }
 }
