@@ -1,19 +1,20 @@
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.Events;
 
-public class UserInterface : MonoBehaviour
+public class UserInterface : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    public void AddEvent(GameObject obj, EventTriggerType type, UnityAction<BaseEventData> action)
+    public void OnPointerEnter(PointerEventData eventData)
     {
-        EventTrigger trigger = obj.GetComponent<EventTrigger>();
-        var eventTrigger = new EventTrigger.Entry();
-        eventTrigger.eventID = type;
-        eventTrigger.callback.AddListener(action);
-        trigger.triggers.Add(eventTrigger);
+        MouseData.mouseOverPanelTransform = this.transform;
+        Debug.Log(MouseData.mouseOverPanelTransform.gameObject.name);
     }
 
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        //MouseData.mouseOverPanelTransform = null;
+    }
 
 
 }

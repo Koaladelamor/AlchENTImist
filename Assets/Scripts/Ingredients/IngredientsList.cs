@@ -5,7 +5,7 @@ using TMPro;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class IngredientsList : MonoBehaviour
+public class IngredientsList : UserInterface
 {
     [SerializeField] private GameObject slotPrefab;
 
@@ -29,6 +29,9 @@ public class IngredientsList : MonoBehaviour
         for (int i = 0; i < 4; i++)
         {
             GameObject tempIngredient = Instantiate(slotPrefab, this.transform);
+            tempIngredient.GetComponent<IngredientInfo>().SetID(ingredientsList[i].id_ingredient);
+            tempIngredient.GetComponent<IngredientInfo>().SetIngredientName(ingredientsList[i].ingredient);
+            tempIngredient.GetComponentInChildren<TextMeshProUGUI>().text = ingredientsList[i].ingredient;
 
         }
     }

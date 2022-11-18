@@ -37,6 +37,10 @@ public class DBManager : MonoBehaviour
         GetPotionTypes();
         GetPotions();
         GetIngredients();
+        /*for (int i = 0; i < potionTypes.Count; i++)
+        {
+            Debug.Log(potionTypes[i].type);
+        }*/
     }
 
     // Update is called once per frame
@@ -61,7 +65,7 @@ public class DBManager : MonoBehaviour
     #endregion
 
     #region DB Read
-    public void GetPotionTypes() 
+    public void GetPotionTypes()
     {
         string query = "SELECT * FROM potion_types";
         IDbCommand cmd = dbConnection.CreateCommand();
@@ -72,11 +76,11 @@ public class DBManager : MonoBehaviour
         {
             PotionType newPotionType = new PotionType();
             newPotionType.id_potion_type = dataReader.GetInt32(0);
-            Debug.Log(newPotionType.id_potion_type);
+            //Debug.Log(newPotionType.id_potion_type);
             newPotionType.type = dataReader.GetString(1);
-            Debug.Log(newPotionType.type);
+            //Debug.Log(newPotionType.type);
             newPotionType.icon = dataReader.GetString(2);
-            Debug.Log(newPotionType.icon);
+            //Debug.Log(newPotionType.icon);
             potionTypes.Add(newPotionType);
         }
 
@@ -93,17 +97,17 @@ public class DBManager : MonoBehaviour
         {
             Potion newPotion = new Potion();
             newPotion.id_potion = dataReader.GetInt32(0);
-            Debug.Log(newPotion.id_potion);
+            //Debug.Log(newPotion.id_potion);
             newPotion.potion = dataReader.GetString(1);
-            Debug.Log(newPotion.potion);
+            //Debug.Log(newPotion.potion);
             newPotion.cost = dataReader.GetFloat(2);
-            Debug.Log(newPotion.cost);
+            //Debug.Log(newPotion.cost);
             newPotion.icon = dataReader.GetString(3);
-            Debug.Log(newPotion.icon);
+            //Debug.Log(newPotion.icon);
             newPotion.description = dataReader.GetString(4);
-            Debug.Log(newPotion.description);
+            //Debug.Log(newPotion.description);
             newPotion.id_potion_type = dataReader.GetInt32(5);
-            Debug.Log(newPotion.id_potion_type);
+            //Debug.Log(newPotion.id_potion_type);
             potions.Add(newPotion);
         }
 
@@ -122,13 +126,13 @@ public class DBManager : MonoBehaviour
             newIngredient.id_ingredient = dataReader.GetInt32(0);
             Debug.Log(newIngredient.id_ingredient);
             newIngredient.ingredient = dataReader.GetString(1);
-            Debug.Log(newIngredient.ingredient);
+            //Debug.Log(newIngredient.ingredient);
             newIngredient.cost = dataReader.GetFloat(2);
-            Debug.Log(newIngredient.cost);
+            //Debug.Log(newIngredient.cost);
             newIngredient.icon = dataReader.GetString(3);
-            Debug.Log(newIngredient.icon);
+            //Debug.Log(newIngredient.icon);
             newIngredient.description = dataReader.GetString(4);
-            Debug.Log(newIngredient.description);
+            //Debug.Log(newIngredient.description);
 
             ingredients.Add(newIngredient);
         }
