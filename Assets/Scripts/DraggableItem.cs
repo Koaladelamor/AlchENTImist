@@ -8,9 +8,11 @@ using TMPro;
 public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     private GameObject mainCanvas;
+    private CraftManager m_craft_manager;
 
     private void Awake()
     {
+        m_craft_manager = GameObject.FindGameObjectWithTag("Craft").GetComponent<CraftManager>();
         mainCanvas = GameObject.FindGameObjectWithTag("MainCanvas");
     }
 
@@ -43,6 +45,8 @@ public class DraggableItem : MonoBehaviour, IBeginDragHandler, IDragHandler, IEn
                 {
 
                     slotAvailable.GetComponent<TextMeshProUGUI>().text = MouseData.tempItemBeingDragged.GetComponentInChildren<TextMeshProUGUI>().text;
+                    m_craft_manager.AddIngredient(this.gameObject.GetComponent<IngredientInfo>().GetID());
+                    m_craft_manager.CheckIngredientBool(true);
                     Destroy(MouseData.tempItemBeingDragged);
                     MouseData.tempItemBeingDragged = null;
                 }
